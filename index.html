@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
+<title>What should I eat</title>
+<link rel="stylesheet" href="css/screen.css">
+</head>
+<body>
+	<div id="wrapper">
+		<div id="container">
+			<div id="content">
+				<div>
+					<div class="name_box">
+						<p></p>
+					</div>
+                    <div id="btn">
+                        点这里
+                    </div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script type="text/javascript" src="js/jquery-2.0.3.min.js"></script>
+	<script type="text/javascript" src="js/dataSource.js"></script>
+	<script>
+        var g_Interval = 1;
+        var g_PersonCount = dataSource.length;//参加抽奖人数
+        var g_Timer;
+        var running = false;
+        $('#btn').on("click",function (e) {
+                if(running){
+                    running = false;
+                    clearTimeout(g_Timer);
+                }
+                else{
+                    running = true;
+                    beginTimer();
+                }
+        });
+        function updateRndNum(){
+            var num = Math.floor(Math.random()*g_PersonCount+1);
+            $('.name_box > p').html(dataSource[num]);
+        }
+
+        function beginTimer(){
+            g_Timer = setTimeout(beat, g_Interval);
+        }
+
+        function beat() {
+            g_Timer = setTimeout(beat, g_Interval);
+            updateRndNum();
+        }
+	</script>
+</body>
+</html>
+
+
+
